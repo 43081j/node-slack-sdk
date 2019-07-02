@@ -1,5 +1,11 @@
 import { Stream } from 'stream';
-import { Dialog, KnownBlock, Block, MessageAttachment, LinkUnfurls } from '@slack/types';
+import {
+  Dialog,
+  KnownBlock,
+  Block,
+  MessageAttachment,
+  LinkUnfurls,
+} from '@slack/types';
 import { WebAPICallOptions, WebAPICallResult } from './WebClient';
 
 // NOTE: could create a named type alias like data types like `SlackUserID: string`
@@ -10,7 +16,7 @@ import { WebAPICallOptions, WebAPICallResult } from './WebClient';
 export default interface Method<MethodArguments extends WebAPICallOptions> {
   // TODO: can we create a relationship between MethodArguments and a MethodResult type? hint: conditional types
   (options?: MethodArguments): Promise<WebAPICallResult>;
-}
+} // eslint-disable-line semi
 
 /*
  * Reusable "protocols" that some MethodArguments types can conform to
@@ -54,29 +60,29 @@ export interface TraditionalPagingEnabled {
  * MethodArguments types (no formal relationship other than the generic constraint in Method<>)
  */
 
-  /*
-   * `api.*`
-   */
-export interface APITestArguments extends WebAPICallOptions {}
+/*
+ * `api.*`
+ */
+export type APITestArguments = WebAPICallOptions;
 
-  /*
-   * `auth.*`
-   */
+/*
+ * `auth.*`
+ */
 export interface AuthRevokeArguments extends WebAPICallOptions, TokenOverridable {
   test: boolean;
 }
 export interface AuthTestArguments extends WebAPICallOptions, TokenOverridable {}
 
-  /*
-   * `bots.*`
-   */
-export interface BotsInfoArguments extends WebAPICallOptions, TokenOverridable  {
+/*
+ * `bots.*`
+ */
+export interface BotsInfoArguments extends WebAPICallOptions, TokenOverridable {
   bot?: string;
 }
 
-  /*
-   * `channels.*`
-   */
+/*
+ * `channels.*`
+ */
 export interface ChannelsArchiveArguments extends WebAPICallOptions, TokenOverridable {
   channel: string;
 }
@@ -138,9 +144,9 @@ export interface ChannelsUnarchiveArguments extends WebAPICallOptions, TokenOver
   channel: string;
 }
 
-  /*
-   * `chat.*`
-   */
+/*
+ * `chat.*`
+ */
 export interface ChatDeleteArguments extends WebAPICallOptions, TokenOverridable {
   channel: string;
   ts: string;
@@ -225,9 +231,9 @@ export interface ChatUpdateArguments extends WebAPICallOptions, TokenOverridable
   parse?: 'full' | 'none';
 }
 
-  /*
-   * `conversations.*`
-   */
+/*
+ * `conversations.*`
+ */
 export interface ConversationsArchiveArguments extends WebAPICallOptions, TokenOverridable {
   channel: string;
 }
@@ -296,17 +302,17 @@ export interface ConversationsUnarchiveArguments extends WebAPICallOptions, Toke
   channel: string;
 }
 
-  /*
-   * `dialog.*`
-   */
+/*
+ * `dialog.*`
+ */
 export interface DialogOpenArguments extends WebAPICallOptions, TokenOverridable {
   trigger_id: string;
   dialog: Dialog;
 }
 
-  /*
-   * `dnd.*`
-   */
+/*
+ * `dnd.*`
+ */
 export interface DndEndDndArguments extends WebAPICallOptions, TokenOverridable {}
 export interface DndEndSnoozeArguments extends WebAPICallOptions, TokenOverridable {}
 export interface DndInfoArguments extends WebAPICallOptions, TokenOverridable {
@@ -319,14 +325,14 @@ export interface DndTeamInfoArguments extends WebAPICallOptions, TokenOverridabl
   users?: string; // comma-separated list of users
 }
 
-  /*
-   * `emoji.*`
-   */
+/*
+ * `emoji.*`
+ */
 export interface EmojiListArguments extends WebAPICallOptions, TokenOverridable {}
 
-  /*
-   * `files.*`
-   */
+/*
+ * `files.*`
+ */
 export interface FilesDeleteArguments extends WebAPICallOptions, TokenOverridable {
   file: string; // file id
 }
@@ -364,9 +370,9 @@ export interface FilesCommentsDeleteArguments extends WebAPICallOptions, TokenOv
   id: string; // comment id
 }
 
-  /*
-   * `groups.*`
-   */
+/*
+ * `groups.*`
+ */
 export interface GroupsArchiveArguments extends WebAPICallOptions, TokenOverridable {
   channel: string;
 }
@@ -429,9 +435,9 @@ export interface GroupsUnarchiveArguments extends WebAPICallOptions, TokenOverri
   channel: string;
 }
 
-  /*
-   * `im.*`
-   */
+/*
+ * `im.*`
+ */
 export interface IMCloseArguments extends WebAPICallOptions, TokenOverridable {
   channel: string;
 }
@@ -455,17 +461,17 @@ export interface IMRepliesArguments extends WebAPICallOptions, TokenOverridable 
   thread_ts?: string;
 }
 
-  /*
-   * `migration.*`
-   */
+/*
+ * `migration.*`
+ */
 export interface MigrationExchangeArguments extends WebAPICallOptions, TokenOverridable {
   users: string; // comma-separated list of users
   to_old?: boolean;
 }
 
-  /*
-   * `mpim.*`
-   */
+/*
+ * `mpim.*`
+ */
 export interface MPIMCloseArguments extends WebAPICallOptions, TokenOverridable {
   channel: string;
 }
@@ -488,9 +494,9 @@ export interface MPIMRepliesArguments extends WebAPICallOptions, TokenOverridabl
   thread_ts: string;
 }
 
-  /*
-   * `oauth.*`
-   */
+/*
+ * `oauth.*`
+ */
 export interface OAuthAccessArguments extends WebAPICallOptions {
   client_id: string;
   client_secret: string;
@@ -498,9 +504,9 @@ export interface OAuthAccessArguments extends WebAPICallOptions {
   redirect_uri?: string;
 }
 
-  /*
-   * `pins.*`
-   */
+/*
+ * `pins.*`
+ */
 export interface PinsAddArguments extends WebAPICallOptions, TokenOverridable {
   channel: string;
   // must supply one of:
@@ -519,9 +525,9 @@ export interface PinsRemoveArguments extends WebAPICallOptions, TokenOverridable
   timestamp?: string;
 }
 
-  /*
-   * `reactions.*`
-   */
+/*
+ * `reactions.*`
+ */
 export interface ReactionsAddArguments extends WebAPICallOptions, TokenOverridable {
   name: string;
   // must supply one of:
@@ -538,7 +544,7 @@ export interface ReactionsGetArguments extends WebAPICallOptions, TokenOverridab
   file?: string; // file id
   file_comment?: string;
 }
-export interface ReactionsListArguments extends WebAPICallOptions, TokenOverridable,  TraditionalPagingEnabled,
+export interface ReactionsListArguments extends WebAPICallOptions, TokenOverridable, TraditionalPagingEnabled,
   CursorPaginationEnabled {
   user?: string;
   full?: boolean;
@@ -553,9 +559,9 @@ export interface ReactionsRemoveArguments extends WebAPICallOptions, TokenOverri
   file_comment?: string;
 }
 
-  /*
-   * `reminders.*`
-   */
+/*
+ * `reminders.*`
+ */
 export interface RemindersAddArguments extends WebAPICallOptions, TokenOverridable {
   text: string;
   time: string | number;
@@ -572,9 +578,9 @@ export interface RemindersInfoArguments extends WebAPICallOptions, TokenOverrida
 }
 export interface RemindersListArguments extends WebAPICallOptions, TokenOverridable {}
 
-  /*
-   * `rtm.*`
-   */
+/*
+ * `rtm.*`
+ */
 export interface RTMConnectArguments extends WebAPICallOptions, TokenOverridable {
   batch_presence_aware?: boolean;
   presence_sub?: boolean;
@@ -588,19 +594,19 @@ export interface RTMStartArguments extends WebAPICallOptions, TokenOverridable, 
   simple_latest?: boolean;
 }
 
-  /*
-   * `search.*`
-   */
-export interface SearchAllArguments extends WebAPICallOptions, TokenOverridable,  TraditionalPagingEnabled,
+/*
+ * `search.*`
+ */
+export interface SearchAllArguments extends WebAPICallOptions, TokenOverridable, TraditionalPagingEnabled,
   Searchable {}
 export interface SearchFilesArguments extends WebAPICallOptions, TokenOverridable, TraditionalPagingEnabled,
   Searchable {}
 export interface SearchMessagesArguments extends WebAPICallOptions, TokenOverridable, TraditionalPagingEnabled,
   Searchable {}
 
-  /*
-   * `stars.*`
-   */
+/*
+ * `stars.*`
+ */
 export interface StarsAddArguments extends WebAPICallOptions, TokenOverridable {
   // must supply one of:
   channel?: string; // paired with `timestamp`
@@ -619,9 +625,9 @@ export interface StarsRemoveArguments extends WebAPICallOptions, TokenOverridabl
   file_comment?: string;
 }
 
-  /*
-   * `team.*`
-   */
+/*
+ * `team.*`
+ */
 export interface TeamAccessLogsArguments extends WebAPICallOptions, TokenOverridable {
   before?: number;
   count?: number;
@@ -643,9 +649,9 @@ export interface TeamProfileGetArguments extends WebAPICallOptions, TokenOverrid
   visibility?: 'all' | 'visible' | 'hidden';
 }
 
-  /*
-   * `usergroups.*`
-   */
+/*
+ * `usergroups.*`
+ */
 export interface UsergroupsCreateArguments extends WebAPICallOptions, TokenOverridable {
   name: string;
   channels?: string; // comma-separated list of channels
@@ -684,9 +690,9 @@ export interface UsergroupsUsersUpdateArguments extends WebAPICallOptions, Token
   include_count?: boolean;
 }
 
-  /*
-   * `users.*`
-   */
+/*
+ * `users.*`
+ */
 export interface UsersConversationsArguments extends WebAPICallOptions, TokenOverridable, CursorPaginationEnabled {
   exclude_archived?: boolean;
   types?: string; // comma-separated list of conversation types
