@@ -36,7 +36,7 @@
     "prepare": "npm run build",
     "build": "npm run build:clean && tsc",
     "build:clean": "shx rm -rf ./dist ./coverage ./.nyc_output",
-    "test": "npm run build && nyc mocha --config .mocharc.json src/*.spec.ts",
+    "test": "npm run build && nyc mocha \"dist/*.spec.js\"",
     "coverage": "codecov -F webapi --root=$PWD"
   },
   "dependencies": {
@@ -69,8 +69,7 @@
     "shelljs": "^0.8.3",
     "shx": "^0.3.2",
     "sinon": "^7.2.7",
-    "source-map-support": "^0.5.10",
-    "ts-node": "^8.0.3",
+    "source-map-support": "^0.5.12",
     "typescript": "^3.3.3333"
   }
 }
