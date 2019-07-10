@@ -1,4 +1,3 @@
-// tslint:disable:no-unused-expression
 import { WebClient } from '@slack/web-api';
 
 const web = new WebClient();
